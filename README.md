@@ -76,9 +76,9 @@ npm run dev
 
 | Role | Email | Password | Primary Capability |
 | :--- | :--- | :--- | :--- |
-| **Admin** | `admin@example.com` | `Admin@123` | System config, user administration, audit logs |
-| **Sales** | `sales@example.com` | `Sales@123` | Lead management, draft challan creation |
-| **Warehouse** | `warehouse@example.com` | `Warehouse@123` | Stock-in, catalog management, inventory logs |
+| **Admin** | `admin-sureshsau631@gmail.com` | `Admin@123` | System config, user administration, audit logs |
+| **Sales** | `sales-sureshsau403@gmail.com` | `Sales@123` | Lead management, draft challan creation |
+| **Warehouse** | `wirehouse-sureshsau7586@gmail.com` | `Warehouse@123` | Stock-in, catalog management, inventory logs |
 | **Accounts** | `accounts@example.com` | `Accounts@123` | Financial confirmation, challan cancellation |
 
 ---
