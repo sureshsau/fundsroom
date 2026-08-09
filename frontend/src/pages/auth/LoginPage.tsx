@@ -21,7 +21,7 @@ export const LoginPage: React.FC = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const { register, handleSubmit, formState: { errors }, setError } = useForm<LoginForm>({
+  const { register, handleSubmit, formState: { errors }, setError, setValue } = useForm<LoginForm>({
     resolver: zodResolver(loginSchema),
   });
 
@@ -40,6 +40,18 @@ export const LoginPage: React.FC = () => {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const testAccounts = [
+    { role: 'Admin', email: 'admin-sureshsau631@gmail.com', pass: 'Admin@123' },
+    { role: 'Sales', email: 'sales-sureshsau403@gmail.com', pass: 'Sales@123' },
+    { role: 'Warehouse', email: 'sureshsau7586@gmail.com', pass: 'Warehouse@123' },
+  ];
+
+  const handleFillCredentials = (email: string, pass: string) => {
+    setValue('email', email, { shouldValidate: true });
+    setValue('password', pass, { shouldValidate: true });
+    toast.success(`Filled ${email}`);
   };
 
   return (
@@ -81,7 +93,7 @@ export const LoginPage: React.FC = () => {
                 type="email"
                 className={`form-input ${errors.email ? 'error' : ''}`}
                 style={{ paddingLeft: 38 }}
-                placeholder="admin@example.com"
+                placeholder="admin-sureshsau631@gmail.com"
                 autoComplete="email"
               />
             </div>
@@ -137,15 +149,22 @@ export const LoginPage: React.FC = () => {
 
         {/* Dev credentials hint */}
         <div style={{ marginTop: '1.5rem', padding: '12px', background: '#f8fafc', borderRadius: 8, border: '1px solid #e2e8f0' }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#475569', marginBottom: 6 }}>Test Credentials</div>
-          {[
-            { role: 'Admin', email: 'admin@example.com', pass: 'Admin@123' },
-            { role: 'Sales', email: 'sales@example.com', pass: 'Sales@123' },
-            { role: 'Warehouse', email: 'warehouse@example.com', pass: 'Warehouse@123' },
-          ].map((c) => (
-            <div key={c.role} style={{ fontSize: 11, color: '#64748b', marginBottom: 2 }}>
-              <strong>{c.role}:</strong> {c.email} / {c.pass}
-            </div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#475569', marginBottom: 6 }}>Test Credentials (Click to autofill)</div>
+          {testAccounts.map((c) => (
+            <button
+              key={c.role}
+              type="button"
+              onClick={() => handleFillCredentials(c.email, c.pass)}
+              style={{
+                display: 'block', width: '100%', textAlign: 'left', background: 'none',
+                border: 'none', cursor: 'pointer', padding: '4px 6px', borderRadius: 4,
+                fontSize: 11, color: '#2563eb', textDecoration: 'none', marginBottom: 2
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = '#eff6ff')}
+              onMouseLeave={(e) => (e.currentTarget.style.background = 'none')}
+            >
+              <strong style={{ color: '#475569' }}>{c.role}:</strong> {c.email} / {c.pass}
+            </button>
           ))}
         </div>
       </div>
