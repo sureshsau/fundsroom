@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import {
   Users, Package, FileText,
   TrendingUp, AlertTriangle, Calendar, Clock,
-  ArrowUpRight, Sparkles, AlertOctagon, Layers
+  ArrowUpRight, AlertOctagon, Layers
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import {
@@ -97,9 +97,8 @@ export const DashboardPage: React.FC = () => {
     <div>
       <div className="page-header">
         <div>
-          <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <h1 className="page-title">
             Good {new Date().getHours() < 12 ? 'morning' : new Date().getHours() < 17 ? 'afternoon' : 'evening'}, {user?.name?.split(' ')[0]}!
-            <Sparkles size={24} color="#818cf8" className="animate-pulse-glow" />
           </h1>
           <p className="page-subtitle">{format(new Date(), 'EEEE, dd MMMM yyyy')} · {user?.role} Operations Command Center</p>
         </div>

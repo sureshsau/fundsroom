@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { Plus, ShieldCheck, ToggleLeft, ToggleRight, CheckCircle2, Clock, Sparkles } from 'lucide-react';
+import { Plus, ShieldCheck, ToggleLeft, ToggleRight, CheckCircle2, Clock } from 'lucide-react';
 import { usersApi } from '../../api';
 import type { User } from '../../types';
 import { useForm } from 'react-hook-form';
@@ -184,7 +184,7 @@ export const UsersPage: React.FC = () => {
               </div>
 
               <div style={{ background: 'rgba(99, 102, 241, 0.1)', border: '1px solid rgba(99, 102, 241, 0.25)', borderRadius: 12, padding: '12px 14px', marginBottom: '1.25rem', fontSize: 12.5, color: '#818cf8', display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500 }}>
-                <Sparkles size={16} color="#818cf8" />
+                <ShieldCheck size={16} color="#818cf8" />
                 <span>User account will be created with pre-verified status and active access.</span>
               </div>
 
