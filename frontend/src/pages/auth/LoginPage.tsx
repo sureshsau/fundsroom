@@ -43,10 +43,9 @@ export const LoginPage: React.FC = () => {
   };
 
   const testAccounts = [
-    { role: 'Admin', email: 'admin@gmail.com', pass: 'Admin@123' },
-    { role: 'Sales', email: 'sales@gmail.com', pass: 'Sales@123' },
-    { role: 'Warehouse', email: 'warehouse@gmail.com', pass: 'Warehouse@123' },
-    { role: 'User', email: 'sureshsau7586@gmail.com', pass: 'Warehouse@123' },
+    { role: 'Admin', email: 'sureshsau631@gmail.com', pass: 'Admin@123' },
+    { role: 'Sales', email: 'sureshsau403@gmail.com', pass: 'Sales@123' },
+    { role: 'Warehouse', email: 'sureshsau7586@gmail.com', pass: 'Warehouse@123' },
   ];
 
   const handleFillCredentials = (email: string, pass: string) => {
@@ -94,7 +93,7 @@ export const LoginPage: React.FC = () => {
                 type="email"
                 className={`form-input ${errors.email ? 'error' : ''}`}
                 style={{ paddingLeft: 38 }}
-                placeholder="admin@gmail.com"
+                placeholder="sureshsau631@gmail.com"
                 autoComplete="email"
               />
             </div>

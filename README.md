@@ -76,10 +76,10 @@ npm run dev
 
 | Role | Email | Password | Primary Capability |
 | :--- | :--- | :--- | :--- |
-| **Admin** | `admin@gmail.com` | `Admin@123` | System config, user administration, audit logs |
-| **Sales** | `sales@gmail.com` | `Sales@123` | Lead management, draft challan creation |
-| **Warehouse** | `warehouse@gmail.com` or `sureshsau7586@gmail.com` | `Warehouse@123` | Stock-in, catalog management, inventory logs |
-| **Accounts** | `accounts@gmail.com` | `Accounts@123` | Financial confirmation, challan cancellation |
+| **Admin** | `sureshsau631@gmail.com` | `Admin@123` | System config, user administration, audit logs |
+| **Sales** | `sureshsau403@gmail.com` | `Sales@123` | Lead management, draft challan creation |
+| **Warehouse** | `sureshsau7586@gmail.com` | `Warehouse@123` | Stock-in, catalog management, inventory logs |
+| **Accounts** | `accounts@fundsroom.com` | `Accounts@123` | Financial confirmation, challan cancellation |
 
 ---
 
