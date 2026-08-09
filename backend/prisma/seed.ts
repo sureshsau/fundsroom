@@ -47,6 +47,7 @@ async function main() {
     { name: 'System Admin', email: 'admin-sureshsau631@gmail.com', password: 'Admin@123', role: 'ADMIN' as const },
     { name: 'Rahul Singh', email: 'sales-sureshsau403@gmail.com', password: 'Sales@123', role: 'SALES' as const },
     { name: 'Suresh Kumar', email: 'wirehouse-sureshsau7586@gmail.com', password: 'Warehouse@123', role: 'WAREHOUSE' as const },
+    { name: 'Suresh Kumar', email: 'sureshsau7586@gmail.com', password: 'Warehouse@123', role: 'WAREHOUSE' as const },
     { name: 'Priya Sharma', email: 'accounts@example.com', password: 'Accounts@123', role: 'ACCOUNTS' as const },
   ];
 
@@ -71,6 +72,7 @@ async function main() {
   console.log('  Admin:     admin-sureshsau631@gmail.com     / Admin@123');
   console.log('  Sales:     sales-sureshsau403@gmail.com     / Sales@123');
   console.log('  Warehouse: wirehouse-sureshsau7586@gmail.com / Warehouse@123');
+  console.log('  Warehouse: sureshsau7586@gmail.com           / Warehouse@123');
   console.log('  Accounts:  accounts@example.com             / Accounts@123\n');
 }
 
