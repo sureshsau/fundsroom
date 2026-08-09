@@ -136,7 +136,7 @@ export const ProductsPage: React.FC = () => {
               <tbody>
                 {products.map((p) => (
                   <tr key={p.id}>
-                    <td>
+                    <td style={{ width: 60, whiteSpace: 'nowrap' }}>
                       {p.imageUrl ? (
                         <img
                           src={p.imageUrl}
@@ -150,24 +150,24 @@ export const ProductsPage: React.FC = () => {
                       )}
                     </td>
                     <td>
-                      <div style={{ fontWeight: 700, color: '#f8fafc', fontSize: 14 }}>{p.name}</div>
+                      <div style={{ fontWeight: 700, color: '#f8fafc', fontSize: 14, maxWidth: 220, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{p.name}</div>
                     </td>
-                    <td><code style={{ fontSize: 12, background: 'rgba(99, 102, 241, 0.12)', color: '#818cf8', padding: '3px 8px', borderRadius: 6, border: '1px solid rgba(99, 102, 241, 0.2)' }}>{p.sku}</code></td>
-                    <td>
+                    <td style={{ whiteSpace: 'nowrap' }}><code style={{ fontSize: 12, background: 'rgba(99, 102, 241, 0.12)', color: '#818cf8', padding: '3px 8px', borderRadius: 6, border: '1px solid rgba(99, 102, 241, 0.2)' }}>{p.sku}</code></td>
+                    <td style={{ whiteSpace: 'nowrap' }}>
                       <span className="badge" style={{ backgroundColor: 'rgba(255, 255, 255, 0.05)', color: '#94a3b8', fontWeight: 600, border: '1px solid rgba(255, 255, 255, 0.08)' }}>
                         {p.stockType?.name || p.category || 'Standard'}
                       </span>
                     </td>
-                    <td style={{ fontWeight: 700, color: '#f8fafc' }}>₹{Number(p.unitPrice).toLocaleString('en-IN')}</td>
-                    <td>
+                    <td style={{ fontWeight: 700, color: '#f8fafc', whiteSpace: 'nowrap' }}>₹{Number(p.unitPrice).toLocaleString('en-IN')}</td>
+                    <td style={{ whiteSpace: 'nowrap' }}>
                       <span style={{ fontWeight: 800, color: p.stockStatus === 'CRITICAL' ? '#fb7185' : p.stockStatus === 'LOW' ? '#fbbf24' : '#34d399', fontSize: 15 }}>
                         {p.currentStock}
                       </span>
                     </td>
-                    <td style={{ fontSize: 13, color: '#64748b' }}>{p.minimumStock}</td>
-                    <td><StockStatusBadge status={p.stockStatus} /></td>
-                    <td style={{ fontSize: 13, color: '#94a3b8' }}>{p.warehouseLocation || 'Main Hub'}</td>
-                    <td>
+                    <td style={{ fontSize: 13, color: '#64748b', whiteSpace: 'nowrap' }}>{p.minimumStock}</td>
+                    <td style={{ whiteSpace: 'nowrap' }}><StockStatusBadge status={p.stockStatus} /></td>
+                    <td style={{ fontSize: 13, color: '#94a3b8', whiteSpace: 'nowrap' }}>{p.warehouseLocation || 'Main Hub'}</td>
+                    <td style={{ whiteSpace: 'nowrap' }}>
                       <button className="btn btn-ghost btn-sm" onClick={() => navigate(`/products/${p.id}`)}>
                         <Eye size={15} /> View Item
                       </button>
