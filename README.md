@@ -7,18 +7,93 @@ Designed with modern full-stack architecture, this platform guarantees transacti
 ---
 
 ## 📋 Table of Contents
-1. [System Architecture & Design](#-system-architecture--design)
-2. [Transaction Safety & Data Consistency](#-transaction-safety--data-consistency)
-3. [Database Design & ERD Specifications](#-database-design--erd-specifications)
-4. [Data Flow Diagrams (DFD)](#-data-flow-diagrams-dfd)
+1. [Quick Start & Local Setup](#-quick-start--local-setup)
+2. [Docker Deployment](#-docker-deployment)
+3. [System Architecture & Design](#-system-architecture--design)
+4. [Transaction Safety & Data Consistency](#-transaction-safety--data-consistency)
+5. [Database Design & ERD Specifications](#-database-design--erd-specifications)
+6. [Data Flow Diagrams (DFD)](#-data-flow-diagrams-dfd)
    - [DFD Level 0 — Context Diagram](#dfd-level-0--context-diagram)
    - [DFD Level 1 — System Process Decomposition](#dfd-level-1--system-process-decomposition)
    - [DFD Level 2 — Detailed Sub-Process Diagrams](#dfd-level-2--detailed-sub-process-diagrams)
-5. [Role-Based Access Control (RBAC) Matrix](#-role-based-access-control-rbac-matrix)
-6. [API Endpoint Catalog](#-api-endpoint-catalog)
-7. [Tech Stack Specifications](#-tech-stack-specifications)
-8. [Quick Start & Local Setup](#-quick-start--local-setup)
-9. [Docker Deployment](#-docker-deployment)
+7. [Role-Based Access Control (RBAC) Matrix](#-role-based-access-control-rbac-matrix)
+8. [API Endpoint Catalog](#-api-endpoint-catalog)
+9. [Tech Stack Specifications](#-tech-stack-specifications)
+
+---
+
+## ⚡ Quick Start & Local Setup
+
+### Prerequisites
+- **Node.js**: v18.x or later
+- **PostgreSQL**: v14.x or later
+- **Redis**: v6.x or later (Optional; fallback available if Redis is offline)
+
+### 1. Environment Configuration
+
+Copy environment template files in both subdirectories:
+
+**Backend Setup (`backend/.env`)**:
+```env
+PORT=5000
+NODE_ENV=development
+DATABASE_URL="postgresql://postgres:postgres@localhost:5432/minierp?schema=public"
+JWT_SECRET="your-super-secret-jwt-key"
+JWT_EXPIRES_IN="7d"
+REDIS_HOST="localhost"
+REDIS_PORT=6379
+CLIENT_URL="http://localhost:5173"
+SMTP_HOST="smtp.ethereal.email"
+SMTP_PORT=587
+SMTP_USER="your-smtp-user"
+SMTP_PASS="your-smtp-pass"
+```
+
+**Frontend Setup (`frontend/.env`)**:
+```env
+VITE_API_BASE_URL="http://localhost:5000/api"
+VITE_SOCKET_URL="http://localhost:5000"
+```
+
+### 2. Backend Initialization
+```bash
+cd backend
+npm install
+npx prisma generate
+npx prisma db push
+npm run seed
+npm run dev
+```
+
+### 3. Frontend Initialization
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+### 🔑 Pre-Seeded Default Test Accounts
+
+| Role | Email | Password | Primary Capability |
+| :--- | :--- | :--- | :--- |
+| **Admin** | `admin@example.com` | `Admin@123` | System config, user administration, audit logs |
+| **Sales** | `sales@example.com` | `Sales@123` | Lead management, draft challan creation |
+| **Warehouse** | `warehouse@example.com` | `Warehouse@123` | Stock-in, catalog management, inventory logs |
+| **Accounts** | `accounts@example.com` | `Accounts@123` | Financial confirmation, challan cancellation |
+
+---
+
+## 🐳 Docker Deployment
+
+The entire stack (PostgreSQL + Redis + Express Backend + Nginx Frontend) can be started with a single command:
+
+```bash
+docker-compose up --build -d
+```
+
+- **Frontend Portal**: `http://localhost`
+- **Backend API**: `http://localhost:5000/api`
+- **Swagger Documentation**: `http://localhost:5000/api-docs`
 
 ---
 
@@ -172,7 +247,7 @@ erDiagram
     User {
         uuid id PK
         string name
-        string email UK
+        string email "UK"
         string passwordHash
         enum role
         boolean isActive
@@ -222,7 +297,7 @@ erDiagram
 
     StockType {
         uuid id PK
-        string name UK
+        string name "UK"
         string description
         datetime createdAt
         datetime updatedAt
@@ -231,7 +306,7 @@ erDiagram
     Product {
         uuid id PK
         string name
-        string sku UK
+        string sku "UK"
         string category
         uuid stockTypeId FK
         decimal unitPrice
@@ -257,7 +332,7 @@ erDiagram
 
     SalesChallan {
         uuid id PK
-        string challanNumber UK
+        string challanNumber "UK"
         uuid customerId FK
         enum status
         int totalQuantity
@@ -292,7 +367,7 @@ erDiagram
 
     NotificationPreference {
         uuid id PK
-        uuid userId FK UK
+        uuid userId FK "UK"
         boolean lowStockEmail
         boolean criticalStockEmail
         boolean challanEmail
@@ -603,81 +678,6 @@ All routes are prefixed with `/api`. Complete Swagger / OpenAPI 3.0 specificatio
 - **Real-Time Communications**: Socket.IO Room Manager
 - **Async Queue**: Redis + BullMQ (Fallback to direct delivery)
 - **Documentation**: OpenAPI 3.0 / Swagger UI (`http://localhost:5000/api-docs`)
-
----
-
-## ⚡ Quick Start & Local Setup
-
-### Prerequisites
-- **Node.js**: v18.x or later
-- **PostgreSQL**: v14.x or later
-- **Redis**: v6.x or later (Optional; fallback available if Redis is offline)
-
-### 1. Environment Configuration
-
-Copy environment template files in both subdirectories:
-
-**Backend Setup (`backend/.env`)**:
-```env
-PORT=5000
-NODE_ENV=development
-DATABASE_URL="postgresql://postgres:postgres@localhost:5432/minierp?schema=public"
-JWT_SECRET="your-super-secret-jwt-key"
-JWT_EXPIRES_IN="7d"
-REDIS_HOST="localhost"
-REDIS_PORT=6379
-CLIENT_URL="http://localhost:5173"
-SMTP_HOST="smtp.ethereal.email"
-SMTP_PORT=587
-SMTP_USER="your-smtp-user"
-SMTP_PASS="your-smtp-pass"
-```
-
-**Frontend Setup (`frontend/.env`)**:
-```env
-VITE_API_BASE_URL="http://localhost:5000/api"
-VITE_SOCKET_URL="http://localhost:5000"
-```
-
-### 2. Backend Initialization
-```bash
-cd backend
-npm install
-npx prisma generate
-npx prisma db push
-npm run seed
-npm run dev
-```
-
-### 3. Frontend Initialization
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-### 🔑 Pre-Seeded Default Test Accounts
-
-| Role | Email | Password | Primary Capability |
-| :--- | :--- | :--- | :--- |
-| **Admin** | `admin@example.com` | `Admin@123` | System config, user administration, audit logs |
-| **Sales** | `sales@example.com` | `Sales@123` | Lead management, draft challan creation |
-| **Warehouse** | `warehouse@example.com` | `Warehouse@123` | Stock-in, catalog management, inventory logs |
-| **Accounts** | `accounts@example.com` | `Accounts@123` | Financial confirmation, challan cancellation |
-
----
-
-## 🐳 Docker Deployment
-
-The entire stack (PostgreSQL + Redis + Express Backend + Nginx Frontend) can be started with a single command:
-
-```bash
-docker-compose up --build -d
-```
-
-- **Frontend Portal**: `http://localhost`
-- **Backend API**: `http://localhost:5000/api`
-- **Swagger Documentation**: `http://localhost:5000/api-docs`
 
 ---
 
