@@ -1,4 +1,4 @@
-# 🏬 Full-Stack Enterprise Mini ERP & CRM Operations Portal
+# Full-Stack Enterprise Mini ERP & CRM Operations Portal
 
 A production-grade, transaction-safe **Mini ERP & CRM Operations Portal** engineered for wholesale, distribution, and supply chain businesses. 
 
@@ -6,23 +6,23 @@ Designed with modern full-stack architecture, this platform guarantees transacti
 
 ---
 
-## 📋 Table of Contents
-1. [Quick Start & Local Setup](#-quick-start--local-setup)
-2. [Docker Deployment](#-docker-deployment)
-3. [System Architecture & Design](#-system-architecture--design)
-4. [Transaction Safety & Data Consistency](#-transaction-safety--data-consistency)
-5. [Database Design & ERD Specifications](#-database-design--erd-specifications)
-6. [Data Flow Diagrams (DFD)](#-data-flow-diagrams-dfd)
+## Table of Contents
+1. [Quick Start & Local Setup](#quick-start--local-setup)
+2. [Docker Deployment](#docker-deployment)
+3. [System Architecture & Design](#system-architecture--design)
+4. [Transaction Safety & Data Consistency](#transaction-safety--data-consistency)
+5. [Database Design & ERD Specifications](#database-design--erd-specifications)
+6. [Data Flow Diagrams (DFD)](#data-flow-diagrams-dfd)
    - [DFD Level 0 — Context Diagram](#dfd-level-0--context-diagram)
    - [DFD Level 1 — System Process Decomposition](#dfd-level-1--system-process-decomposition)
    - [DFD Level 2 — Detailed Sub-Process Diagrams](#dfd-level-2--detailed-sub-process-diagrams)
-7. [Role-Based Access Control (RBAC) Matrix](#-role-based-access-control-rbac-matrix)
-8. [API Endpoint Catalog](#-api-endpoint-catalog)
-9. [Tech Stack Specifications](#-tech-stack-specifications)
+7. [Role-Based Access Control (RBAC) Matrix](#role-based-access-control-rbac-matrix)
+8. [API Endpoint Catalog](#api-endpoint-catalog)
+9. [Tech Stack Specifications](#tech-stack-specifications)
 
 ---
 
-## ⚡ Quick Start & Local Setup
+## Quick Start & Local Setup
 
 ### Prerequisites
 - **Node.js**: v18.x or later
@@ -35,24 +35,34 @@ Copy environment template files in both subdirectories:
 
 **Backend Setup (`backend/.env`)**:
 ```env
-PORT=5000
+PORT=8000
 NODE_ENV=development
-DATABASE_URL="postgresql://postgres:postgres@localhost:5432/minierp?schema=public"
-JWT_SECRET="your-super-secret-jwt-key"
+DATABASE_URL="postgresql://postgres:password@db.ruxcpoxgtkyjowlyheiu.supabase.co:5432/postgres"
+JWT_SECRET="dev-secret-jwt-key-erp-portal-2026"
 JWT_EXPIRES_IN="7d"
-REDIS_HOST="localhost"
-REDIS_PORT=6379
+
 CLIENT_URL="http://localhost:5173"
-SMTP_HOST="smtp.ethereal.email"
+
+# SMTP Email Configuration
+SMTP_HOST="smtp.gmail.com"
 SMTP_PORT=587
-SMTP_USER="your-smtp-user"
-SMTP_PASS="your-smtp-pass"
+SMTP_USER="sureshsau631@gmail.com"
+SMTP_PASSWORD="your-app-password"
+EMAIL_FROM="ERP Portal <sureshsau631@gmail.com>"
+
+# Redis / Queue Configuration (Upstash or Local Redis)
+REDIS_URL="rediss://default:password@close-mongoose-83532.upstash.io:6379"
+
+# Cloudinary Configuration
+CLOUDINARY_CLOUD_NAME="your-cloud-name"
+CLOUDINARY_API_KEY="your-api-key"
+CLOUDINARY_API_SECRET="your-api-secret"
 ```
 
 **Frontend Setup (`frontend/.env`)**:
 ```env
-VITE_API_BASE_URL="http://localhost:5000/api"
-VITE_SOCKET_URL="http://localhost:5000"
+VITE_API_URL="http://localhost:8000/api"
+VITE_SOCKET_URL="http://localhost:8000"
 ```
 
 ### 2. Backend Initialization
@@ -72,7 +82,7 @@ npm install
 npm run dev
 ```
 
-### 🔑 Pre-Seeded Default Test Accounts
+### Pre-Seeded Default Test Accounts
 
 | Role | Email | Password | Primary Capability |
 | :--- | :--- | :--- | :--- |
@@ -83,7 +93,7 @@ npm run dev
 
 ---
 
-## 🐳 Docker Deployment
+## Docker Deployment
 
 The entire stack (PostgreSQL + Redis + Express Backend + Nginx Frontend) can be started with a single command:
 
@@ -92,12 +102,12 @@ docker-compose up --build -d
 ```
 
 - **Frontend Portal**: `http://localhost`
-- **Backend API**: `http://localhost:5000/api`
-- **Swagger Documentation**: `http://localhost:5000/api-docs`
+- **Backend API**: `http://localhost:8000/api`
+- **Swagger Documentation**: `http://localhost:8000/api-docs`
 
 ---
 
-## 🏗️ System Architecture & Design
+## System Architecture & Design
 
 The platform adopts a **Monolithic Modular Architecture** combining a React + TypeScript single-page client with an Express + TypeScript application server. Real-time notifications and asynchronous email worker processes run in tandem alongside PostgreSQL transactional persistence.
 
@@ -171,7 +181,7 @@ graph TD
 
 ---
 
-## 🔒 Transaction Safety & Data Consistency
+## Transaction Safety & Data Consistency
 
 Handling inventory deduction and customer billing requires strict concurrency controls to prevent overselling, race conditions, and corrupted historical pricing.
 
@@ -219,7 +229,7 @@ Future changes to `Product.unitPrice` or `Product.name` do **not** affect histor
 
 ---
 
-## 🗄️ Database Design & ERD Specifications
+## Database Design & ERD Specifications
 
 The relational schema is built on PostgreSQL via Prisma ORM, enforcing foreign key integrity, index optimizations, cascades, and enum-restricted state machines.
 
@@ -405,7 +415,7 @@ erDiagram
 
 ---
 
-## 📊 Data Flow Diagrams (DFD)
+## Data Flow Diagrams (DFD)
 
 ### DFD Level 0 — Context Diagram
 The Level 0 Context Diagram depicts system boundaries and interactions between primary external entities and the Mini ERP Engine.
@@ -583,27 +593,27 @@ graph TD
 
 ---
 
-## 🔒 Role-Based Access Control (RBAC) Matrix
+## Role-Based Access Control (RBAC) Matrix
 
 The system implements strict route guards on the frontend and role-verification middleware on backend endpoints.
 
 | Feature / Resource | ADMIN | SALES | WAREHOUSE | ACCOUNTS |
 | :--- | :---: | :---: | :---: | :---: |
-| **User Management** (Create, Update, List, Revoke Users) | ✅ | ❌ | ❌ | ❌ |
-| **Audit Logs** (View System Audit Logs) | ✅ | ❌ | ❌ | ❌ |
-| **Customer Management** (Create, Edit Customers) | ✅ | ✅ | ❌ | 👁️ Read-Only |
-| **Customer Follow-ups** (Create, Update Follow-ups) | ✅ | ✅ | ❌ | ❌ |
-| **Stock Types** (Manage Categories) | ✅ | ❌ | ✅ | ❌ |
-| **Product Catalog** (Create/Edit Products) | ✅ | 👁️ Read-Only | ✅ | 👁️ Read-Only |
-| **Inventory Stock-In** (Add Stock Movements) | ✅ | ❌ | ✅ | ❌ |
-| **Sales Challans (Create Draft)** | ✅ | ✅ | ❌ | ❌ |
-| **Sales Challans (Confirm & Deduct Stock)** | ✅ | ✅ | ❌ | ✅ |
-| **Sales Challans (Cancel Challan)** | ✅ | ❌ | ❌ | ✅ |
-| **Dashboard Analytics** (Revenue & Operations View) | ✅ | 👁️ Sales Only | 👁️ Stock Only | 👁️ Finance Only |
+| **User Management** (Create, Update, List, Revoke Users) | Yes | No | No | No |
+| **Audit Logs** (View System Audit Logs) | Yes | No | No | No |
+| **Customer Management** (Create, Edit Customers) | Yes | Yes | No | Read-Only |
+| **Customer Follow-ups** (Create, Update Follow-ups) | Yes | Yes | No | No |
+| **Stock Types** (Manage Categories) | Yes | No | Yes | No |
+| **Product Catalog** (Create/Edit Products) | Yes | Read-Only | Yes | Read-Only |
+| **Inventory Stock-In** (Add Stock Movements) | Yes | No | Yes | No |
+| **Sales Challans (Create Draft)** | Yes | Yes | No | No |
+| **Sales Challans (Confirm & Deduct Stock)** | Yes | Yes | No | Yes |
+| **Sales Challans (Cancel Challan)** | Yes | No | No | Yes |
+| **Dashboard Analytics** (Revenue & Operations View) | Yes | Sales Only | Stock Only | Finance Only |
 
 ---
 
-## 🌐 API Endpoint Catalog
+## API Endpoint Catalog
 
 All routes are prefixed with `/api`. Complete Swagger / OpenAPI 3.0 specification is available interactively at `/api-docs`.
 
@@ -661,7 +671,7 @@ All routes are prefixed with `/api`. Complete Swagger / OpenAPI 3.0 specificatio
 
 ---
 
-## 💻 Tech Stack Specifications
+## Tech Stack Specifications
 
 ### Frontend
 - **Framework**: React 18 + TypeScript + Vite
@@ -677,9 +687,9 @@ All routes are prefixed with `/api`. Complete Swagger / OpenAPI 3.0 specificatio
 - **Authentication**: JWT + BCrypt + OTP Service
 - **Real-Time Communications**: Socket.IO Room Manager
 - **Async Queue**: Redis + BullMQ (Fallback to direct delivery)
-- **Documentation**: OpenAPI 3.0 / Swagger UI (`http://localhost:5000/api-docs`)
+- **Documentation**: OpenAPI 3.0 / Swagger UI (`http://localhost:8000/api-docs`)
 
 ---
 
-## 📄 License
+## License
 This project is proprietary software built for corporate ERP & CRM operational deployment. All rights reserved.
