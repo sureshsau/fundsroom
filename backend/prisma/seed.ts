@@ -96,6 +96,7 @@ async function main() {
       currentStock: 45,
       minimumStock: 10,
       warehouseLocation: 'Rack A-12',
+      imageUrl: 'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=600&auto=format&fit=crop&q=80',
     },
     {
       name: 'Logitech MX Master 3S Wireless Mouse',
@@ -105,6 +106,7 @@ async function main() {
       currentStock: 8, // Low Stock Alert
       minimumStock: 15,
       warehouseLocation: 'Shelf B-04',
+      imageUrl: 'https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=600&auto=format&fit=crop&q=80',
     },
     {
       name: 'Ergonomic Executive Mesh Chair',
@@ -114,6 +116,7 @@ async function main() {
       currentStock: 2, // Critical Stock Alert
       minimumStock: 10,
       warehouseLocation: 'Warehouse Floor 2',
+      imageUrl: 'https://images.unsplash.com/photo-1580481072645-022f9a6d8310?w=600&auto=format&fit=crop&q=80',
     },
     {
       name: 'Standing Electric Desk (Dual Motor)',
@@ -123,6 +126,7 @@ async function main() {
       currentStock: 18,
       minimumStock: 5,
       warehouseLocation: 'Warehouse Floor 2',
+      imageUrl: 'https://images.unsplash.com/photo-1595515106969-1ce29566ff1c?w=600&auto=format&fit=crop&q=80',
     },
     {
       name: 'Cat6 Shielded Ethernet Cable 305m',
@@ -132,6 +136,7 @@ async function main() {
       currentStock: 35,
       minimumStock: 12,
       warehouseLocation: 'Rack C-01',
+      imageUrl: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=600&auto=format&fit=crop&q=80',
     },
     {
       name: 'HDMI 2.1 Ultra High Speed Cable 2m',
@@ -141,6 +146,7 @@ async function main() {
       currentStock: 4, // Critical Stock Alert
       minimumStock: 20,
       warehouseLocation: 'Rack C-02',
+      imageUrl: 'https://images.unsplash.com/photo-1547082299-de196ea013d6?w=600&auto=format&fit=crop&q=80',
     },
     {
       name: 'Industrial Aluminum Extrusion Bar 2m',
@@ -150,6 +156,7 @@ async function main() {
       currentStock: 120,
       minimumStock: 30,
       warehouseLocation: 'Bay D-10',
+      imageUrl: 'https://images.unsplash.com/photo-1504917599217-d4dc5ebe6122?w=600&auto=format&fit=crop&q=80',
     },
     {
       name: 'Copper Wire Spool 100m (1.5 sq mm)',
@@ -159,6 +166,7 @@ async function main() {
       currentStock: 9, // Low Stock Alert
       minimumStock: 10,
       warehouseLocation: 'Bay D-12',
+      imageUrl: 'https://images.unsplash.com/photo-1563770660941-20978e870e26?w=600&auto=format&fit=crop&q=80',
     },
     {
       name: 'Heavy Duty Corrugated Box (Large)',
@@ -168,6 +176,7 @@ async function main() {
       currentStock: 450,
       minimumStock: 100,
       warehouseLocation: 'Packaging Zone 1',
+      imageUrl: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&auto=format&fit=crop&q=80',
     },
     {
       name: 'Industrial Bubble Wrap Roll (50m)',
@@ -177,6 +186,7 @@ async function main() {
       currentStock: 28,
       minimumStock: 10,
       warehouseLocation: 'Packaging Zone 2',
+      imageUrl: 'https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?w=600&auto=format&fit=crop&q=80',
     },
     {
       name: 'Smart IoT Gateway Hub',
@@ -186,6 +196,7 @@ async function main() {
       currentStock: 60,
       minimumStock: 15,
       warehouseLocation: 'Finished Goods Vault',
+      imageUrl: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&auto=format&fit=crop&q=80',
     },
     {
       name: 'Portable Power Station 1000W',
@@ -195,6 +206,7 @@ async function main() {
       currentStock: 3, // Critical Stock Alert
       minimumStock: 8,
       warehouseLocation: 'Finished Goods Vault',
+      imageUrl: 'https://images.unsplash.com/photo-1617788138017-80ad40651399?w=600&auto=format&fit=crop&q=80',
     },
   ];
 
@@ -212,6 +224,7 @@ async function main() {
         currentStock: p.currentStock,
         minimumStock: p.minimumStock,
         warehouseLocation: p.warehouseLocation,
+        imageUrl: p.imageUrl,
         createdAt: daysAgo(1, 12),
       },
     });
