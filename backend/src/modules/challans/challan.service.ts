@@ -247,7 +247,7 @@ export const confirmChallan = async (id: string, confirmedByUserId: string) => {
   // 7. Notify challan confirmed
   notifyChallanConfirmed(
     { id: updatedChallan.id, challanNumber: updatedChallan.challanNumber, customerId: updatedChallan.customerId },
-    { name: updatedChallan.customer.name },
+    { name: updatedChallan.customer.name, email: updatedChallan.customer.email },
     confirmedByUserId,
     updatedChallan.totalQuantity
   ).catch((err) => console.error('[Notification] Challan notify failed:', err));

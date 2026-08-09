@@ -116,11 +116,21 @@ export const notifyChallanCreated = async (
 
 export const notifyChallanConfirmed = async (
   challan: { id: string; challanNumber: string; customerId: string },
-  customer: { name: string },
+  customer: { name: string; email?: string | null },
   createdByUserId: string,
   totalQuantity: number
 ): Promise<void> => {
-  // Notify ACCOUNTS and ADMIN users
+  // 1. Send receipt email directly to Customer if customer has an email registered
+  if (customer.email) {
+    await queueEmail('SEND_CHALLAN_EMAIL', {
+      to: customer.email,
+      challanNumber: challan.challanNumber,
+      customerName: customer.name,
+      totalQuantity,
+    });
+  }
+
+  // 2. Notify ACCOUNTS and ADMIN users via Socket.IO & In-App Notifications
   const users = await prisma.user.findMany({
     where: {
       role: { in: ['ACCOUNTS', 'ADMIN'] },
@@ -132,7 +142,6 @@ export const notifyChallanConfirmed = async (
   for (const user of users) {
     const prefs = user.notificationPrefs;
     const socketEnabled = prefs?.challanSocket ?? true;
-    const emailEnabled = prefs?.challanEmail ?? true;
 
     if (socketEnabled) {
       const notification = await prisma.notification.create({
@@ -147,18 +156,9 @@ export const notifyChallanConfirmed = async (
       });
       emitToUser(user.id, 'notification', notification);
     }
-
-    if (emailEnabled) {
-      await queueEmail('SEND_CHALLAN_EMAIL', {
-        to: user.email,
-        challanNumber: challan.challanNumber,
-        customerName: customer.name,
-        totalQuantity,
-      });
-    }
   }
 
-  // Also notify the creator
+  // 3. Also notify the creator via Socket.IO
   const creatorNotification = await prisma.notification.create({
     data: {
       userId: createdByUserId,
