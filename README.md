@@ -1,5 +1,20 @@
 # Full-Stack Enterprise Mini ERP & CRM Operations Portal
 
+> 🌐 **Live Web Application**: [https://fundsroom-j4lq.vercel.app/login](https://fundsroom-j4lq.vercel.app/login)  
+> ⚡ **Live Backend API**: [https://fundsroom-wheat.vercel.app/](https://fundsroom-wheat.vercel.app/)
+
+---
+
+### 🔑 Recruiter Quick Test Credentials
+| Role | Email | Password | Primary Capabilities |
+| :--- | :--- | :--- | :--- |
+| 🛡️ **Admin** | `sureshsau631@gmail.com` | `Admin@123` | Full System Access, User Administration, Audit Compliance Logs |
+| 💼 **Sales** | `sureshsau403@gmail.com` | `Sales@123` | Customer CRM, Follow-up Reminders, Draft Challan Creation |
+| 📦 **Warehouse** | `sureshsau7586@gmail.com` | `Warehouse@123` | Inventory Management, Stock-In Movement, Catalog |
+| 💳 **Accounts** | `accounts@fundsroom.com` | `Accounts@123` | Challan Financial Confirmation & Stock Safety Enforcement |
+
+---
+
 A production-grade, transaction-safe **Mini ERP & CRM Operations Portal** engineered for wholesale, distribution, and supply chain businesses. 
 
 Designed with modern full-stack architecture, this platform guarantees transactional safety under high concurrency, granular Role-Based Access Control (RBAC), real-time event notifications via Socket.IO, resilient background job processing with Redis and BullMQ, and comprehensive audit compliance logging.
