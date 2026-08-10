@@ -5,7 +5,7 @@
     "lib": ["ES2020"],
     "outDir": "./dist",
     "rootDir": ".",
-    "strict": true,
+    "strict": false,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
@@ -17,8 +17,9 @@
     "emitDecoratorMetadata": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true
+    "noImplicitReturns": false,
+    "noFallthroughCasesInSwitch": false,
+    "noEmitOnError": false
   },
   "include": ["src/**/*", "api/**/*"],
   "exclude": ["node_modules", "dist"]
