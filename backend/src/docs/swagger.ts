@@ -108,6 +108,13 @@ const swaggerDocument = {
 };
 
 export const setupSwagger = (app: Express): void => {
-  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-  console.log(`📚 Swagger documentation available at http://localhost:${process.env.PORT || 8000}/api-docs`);
+  try {
+    app.get('/api-docs/json', (req, res) => {
+      res.json(swaggerDocument);
+    });
+    app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+    console.log(`📚 Swagger documentation initialized`);
+  } catch (err) {
+    console.warn('[Swagger] Warning: Swagger UI setup failed:', (err as Error).message);
+  }
 };

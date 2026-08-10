@@ -43,7 +43,17 @@ if (config.nodeEnv !== 'test') {
   app.use(morgan(config.nodeEnv === 'production' ? 'combined' : 'dev'));
 }
 
-// ─── Health Check ─────────────────────────────────────
+// ─── Root & Health Check ──────────────────────────────
+app.get('/', (req, res) => {
+  res.json({
+    status: 'OK',
+    message: 'ERP & CRM Operations Portal API',
+    health: '/health',
+    docs: '/api-docs',
+    timestamp: new Date().toISOString(),
+  });
+});
+
 app.get('/health', (req, res) => {
   res.json({ status: 'OK', timestamp: new Date().toISOString() });
 });
